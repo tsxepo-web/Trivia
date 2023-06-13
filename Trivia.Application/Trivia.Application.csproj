@@ -9,5 +9,11 @@
   <ItemGroup>
     <Folder Include="IServices\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.19.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Trivia.DataAccess\Trivia.DataAccess.csproj" />
+  </ItemGroup>
 
 </Project>
