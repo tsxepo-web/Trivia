@@ -10,9 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 DotEnv.Load();
 var envKeys = DotEnv.Read();
-var mongoConnectionString = envKeys["ConnectionString"];
-var mongoDatabaseName = envKeys["DatabaseName"];
-var mongoCollectionName = envKeys["CollectionName"];
+var mongoConnectionString = "mongodb://trivia-app:9Oqvib8Namzi5UO7ec4vunXZZynfyoD5HRwiogvZKrm1ITuZAWiDA2DbV1VSNiLbj48ALkfvSJylACDbzljhTw%3D%3D@trivia-app.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@trivia-app@";
+var mongoDatabaseName = "trivia";
+var mongoCollectionName = "questions";
 var mongoClient = new MongoClient(mongoConnectionString);
 var mongoDatabase = mongoClient.GetDatabase(mongoDatabaseName);
 var mongoCollection = mongoDatabase.GetCollection<Questions>(mongoCollectionName);
