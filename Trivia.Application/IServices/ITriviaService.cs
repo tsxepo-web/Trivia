@@ -10,9 +10,9 @@ namespace Trivia.Application.IServices
     {
         Task<IEnumerable<Questions>> GetQuestionsAsync();
         Task<Questions> GetRandomQuestionAsync();
-        Task<Questions> GetQuestionAsync(string question);
+        Task<Questions> GetQuestionAsync(string id);
         Task CreateQuestionAsync(Questions question);
         Task UpdateQuestionAsync(Questions question);
-        Task DeleteQuestionAsync(string question);
+        Task DeleteQuestionAsync(string id);
     }
 }
