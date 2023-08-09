@@ -38,7 +38,7 @@ namespace Trivia.API.Controllers
         public async Task<IActionResult> PostQuestion([FromBody] Questions question)
         {
             await _triviaService.CreateQuestionAsync(question);
-            return NoContent();
+            return CreatedAtAction("GetQuestion", new { id = question.Id}, question);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQuestion(string id)
