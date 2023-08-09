@@ -35,7 +35,7 @@ namespace Trivia.API.Controllers
             return NoContent();
         }
         [HttpPost]
-        public async Task<IActionResult> PostQuestion(Questions question)
+        public async Task<IActionResult> PostQuestion([FromBody] Questions question)
         {
             await _triviaService.CreateQuestionAsync(question);
             return NoContent();
