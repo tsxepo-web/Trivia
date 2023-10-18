@@ -19,9 +19,9 @@ namespace Trivia.Application
         {
             await _triviaCollection.InsertOneAsync(question);
         }
-        public async Task DeleteQuestionAsync(string question)
+        public async Task DeleteQuestionAsync(string id)
         {
-            await _triviaCollection.DeleteOneAsync(x => x.Question == question);
+            await _triviaCollection.DeleteOneAsync(x => x.Id == id);
         }
         public async Task<Questions> GetRandomQuestionAsync()
         {
@@ -39,14 +39,14 @@ namespace Trivia.Application
             return await _triviaCollection.Find(_ => true).ToListAsync();
         }
 
-        public async Task<Questions> GetQuestionAsync(string question)
+        public async Task<Questions> GetQuestionAsync(string id)
         {
-            return await _triviaCollection.Find(x => x.Question == question).FirstOrDefaultAsync();
+            return await _triviaCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task UpdateQuestionAsync(Questions question)
         {
-            await _triviaCollection.ReplaceOneAsync(x => x.Question == question.Question, question);
+            await _triviaCollection.ReplaceOneAsync(x => x.Id == question.Id, question);
         }
     }
 }

@@ -27,28 +27,28 @@ namespace Trivia.API.Controllers
         {
             return await _triviaService.GetRandomQuestionAsync();
         }
-        [HttpPut("{question}")]
-        public async Task<ActionResult<Questions>> PutQuestion([FromBody] Questions item, string question)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Questions>> PutQuestion(string id, [FromBody] Questions question)
         {
-            if (question != item.Question) return BadRequest();
-            await _triviaService.UpdateQuestionAsync(item);
+            if (id != question.Id) return BadRequest();
+            await _triviaService.UpdateQuestionAsync(question);
             return NoContent();
         }
         [HttpPost]
-        public async Task<IActionResult> PostQuestion(Questions question)
+        public async Task<IActionResult> PostQuestion([FromBody] Questions question)
         {
             await _triviaService.CreateQuestionAsync(question);
-            return NoContent();
+            return CreatedAtAction("GetQuestion", new { id = question.Id}, question);
         }
-        [HttpDelete("{question}")]
-        public async Task<IActionResult> DeleteQuestion(string question)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteQuestion(string id)
         {
-            var questionToDelete = await _triviaService.GetQuestionAsync(question);
-            if (questionToDelete == null)
+            var questionToDelete = await _triviaService.GetQuestionAsync(id);
+            if (questionToDelete.Id == null)
             {
                 return NotFound();
             }
-            await _triviaService.DeleteQuestionAsync(questionToDelete.Question!);
+            await _triviaService.DeleteQuestionAsync(questionToDelete.Id);
             return NoContent();
         }
     }
